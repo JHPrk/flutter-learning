@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "166621159878",
+    "project_id": "cardproject-60ee2",
+    "storage_bucket": "cardproject-60ee2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166621159878:android:cbe4c87207831bdc7e12c7",
+        "android_client_info": {
+          "package_name": "com.example.card"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANSHSvnSkpdIQmsvCGpai8VGJdAvHVfi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
