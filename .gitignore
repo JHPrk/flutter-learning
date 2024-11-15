@@ -25,3 +25,4 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+development_kit/flutter-games-card/lib/firebase_options.dart
