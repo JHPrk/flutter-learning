@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_todo_app_001/main.dart';
 import 'package:provider_todo_app_001/models/todo_model.dart';
 import 'package:provider_todo_app_001/providers/providers.dart';
+import 'package:provider_todo_app_001/utils/debounce.dart';
 
 class TodosPage extends StatefulWidget {
   const TodosPage({super.key});
@@ -14,7 +14,7 @@ class TodosPage extends StatefulWidget {
 class _TodosPageState extends State<TodosPage> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
@@ -73,7 +73,7 @@ class _TodoItemState extends State<TodoItem> {
               return StatefulBuilder(
                   builder: (BuildContext context, StateSetter setState) {
                 return AlertDialog(
-                  title: Text('Edit Todo'),
+                  title: const Text('Edit Todo'),
                   content: TextField(
                     controller: textController,
                     autofocus: true,
@@ -177,7 +177,8 @@ class ShowTodos extends StatelessWidget {
 }
 
 class SearchAndFilterTodo extends StatelessWidget {
-  const SearchAndFilterTodo({super.key});
+  SearchAndFilterTodo({super.key});
+  final Debounce debounce = Debounce(milliseconds: 500);
 
   @override
   Widget build(BuildContext context) {
@@ -191,11 +192,13 @@ class SearchAndFilterTodo extends StatelessWidget {
               prefixIcon: Icon(Icons.search)),
           onChanged: (String? newSearchTerm) {
             if (newSearchTerm != null) {
-              context.read<TodoSearch>().setSearchTerm(newSearchTerm);
+              debounce.run(() {
+                context.read<TodoSearch>().setSearchTerm(newSearchTerm);
+              });
             }
           },
         ),
-        SizedBox(
+        const SizedBox(
           height: 10.0,
         ),
         Row(
