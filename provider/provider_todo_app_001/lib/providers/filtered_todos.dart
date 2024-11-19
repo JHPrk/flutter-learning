@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
 import 'package:provider_todo_app_001/models/todo_model.dart';
 import 'package:provider_todo_app_001/providers/todo_filter.dart';
 import 'package:provider_todo_app_001/providers/todo_list.dart';
 import 'package:provider_todo_app_001/providers/todo_search.dart';
+import 'package:state_notifier/state_notifier.dart';
 
 class FilteredTodosState extends Equatable {
   final List<Todo> filteredTodos;
@@ -30,39 +32,36 @@ class FilteredTodosState extends Equatable {
   }
 }
 
-class FilteredTodos {
-  final TodoFilter todoFilter;
-  final TodoSearch todoSearch;
-  final TodoList todoList;
+class FilteredTodos extends StateNotifier<FilteredTodosState>
+    with LocatorMixin {
+  FilteredTodos() : super(FilteredTodosState.initial());
 
-  FilteredTodos(
-      {required this.todoFilter,
-      required this.todoSearch,
-      required this.todoList});
-
-  FilteredTodosState get state {
+  @override
+  void update(Locator watch) {
+    final filter = watch<TodoFilterState>().filter;
+    final todoSearchTerm = watch<TodoSearchState>().todoSearchTerm;
+    final todos = watch<TodoListState>().todos;
     List<Todo> filteredTodos;
-    switch (todoFilter.state.filter) {
+    switch (filter) {
       case Filter.active:
-        filteredTodos =
-            todoList.state.todos.where((Todo todo) => !todo.completed).toList();
+        filteredTodos = todos.where((Todo todo) => !todo.completed).toList();
         break;
       case Filter.completed:
-        filteredTodos =
-            todoList.state.todos.where((Todo todo) => todo.completed).toList();
+        filteredTodos = todos.where((Todo todo) => todo.completed).toList();
         break;
       case Filter.all:
       default:
-        filteredTodos = todoList.state.todos;
+        filteredTodos = todos;
         break;
     }
 
-    if (todoSearch.state.todoSearchTerm.isNotEmpty) {
+    if (todoSearchTerm.isNotEmpty) {
       filteredTodos = filteredTodos
-          .where((Todo todo) =>
-              todo.desc.toLowerCase().contains(todoSearch.state.todoSearchTerm))
+          .where(
+              (Todo todo) => todo.desc.toLowerCase().contains(todoSearchTerm))
           .toList();
     }
-    return FilteredTodosState(filteredTodos: filteredTodos);
+    state = state.copyWith(filteredTodos: filteredTodos);
+    super.update(watch);
   }
 }

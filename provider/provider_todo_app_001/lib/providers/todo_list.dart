@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
 import 'package:provider_todo_app_001/models/todo_model.dart';
 
@@ -32,48 +33,43 @@ class TodoListState extends Equatable {
   }
 }
 
-class TodoList with ChangeNotifier {
-  TodoListState _state = TodoListState.initial();
-  TodoListState get state => _state;
+class TodoList extends StateNotifier<TodoListState> {
+  TodoList() : super(TodoListState.initial());
 
   // 새로운 Todo 추가
   void addTodo(String todoDesc) {
     final newTodo = Todo(desc: todoDesc);
     final newTodos = [...state.todos, newTodo];
 
-    _state = _state.copyWith(todos: newTodos);
+    state = state.copyWith(todos: newTodos);
     print(state);
-    notifyListeners();
   }
 
   void editTodo(String id, String todoDesc) {
-    final newTodos = _state.todos.map((Todo todo) {
+    final newTodos = state.todos.map((Todo todo) {
       if (todo.id == id) {
         return Todo(id: id, desc: todoDesc, completed: todo.completed);
       }
       return todo;
     }).toList();
 
-    _state = _state.copyWith(todos: newTodos);
-    notifyListeners();
+    state = state.copyWith(todos: newTodos);
   }
 
   void toggleTodo(String id) {
-    final newTodos = _state.todos.map((Todo todo) {
+    final newTodos = state.todos.map((Todo todo) {
       if (todo.id == id) {
         return Todo(id: todo.id, desc: todo.desc, completed: !todo.completed);
       }
       return todo;
     }).toList();
 
-    _state = _state.copyWith(todos: newTodos);
-    notifyListeners();
+    state = state.copyWith(todos: newTodos);
   }
 
   void removeTodo(Todo todo) {
-    final newTodos = _state.todos.where((Todo t) => t.id != todo.id).toList();
+    final newTodos = state.todos.where((Todo t) => t.id != todo.id).toList();
 
-    _state = _state.copyWith(todos: newTodos);
-    notifyListeners();
+    state = state.copyWith(todos: newTodos);
   }
 }

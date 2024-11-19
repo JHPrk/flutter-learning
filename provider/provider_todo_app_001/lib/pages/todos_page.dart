@@ -133,7 +133,7 @@ class ShowTodos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todos = context.watch<FilteredTodos>().state.filteredTodos;
+    final todos = context.watch<FilteredTodosState>().filteredTodos;
     return ListView.separated(
         primary: false,
         shrinkWrap: true,
@@ -229,7 +229,7 @@ class SearchAndFilterTodo extends StatelessWidget {
   }
 
   Color textColor(BuildContext context, Filter filter) {
-    final currentFilter = context.watch<TodoFilter>().state.filter;
+    final currentFilter = context.watch<TodoFilterState>().filter;
     return currentFilter == filter ? Colors.blue : Colors.grey;
   }
 }
@@ -278,7 +278,7 @@ class TodoHeader extends StatelessWidget {
           style: TextStyle(fontSize: 40.0),
         ),
         Text(
-          '${context.watch<ActiveTodoCount>().state.activeTodoCount} items left',
+          '${context.watch<ActiveTodoCountState>().activeTodoCount} items left',
           style: const TextStyle(fontSize: 20.0, color: Colors.redAccent),
         )
       ],
