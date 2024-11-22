@@ -4,9 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 
 import 'package:open_weather_provider/models/custom_error.dart';
+import 'package:open_weather_provider/models/weather.dart';
 import 'package:open_weather_provider/repositories/weather_repository.dart';
-
-import '../../models/weather.dart';
 
 part 'weather_state.dart';
 

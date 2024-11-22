@@ -17,7 +17,8 @@ void main() async {
     dev.log(record.message,
         time: record.time, level: record.level.value, name: record.loggerName);
   });
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

@@ -3,9 +3,8 @@ import 'package:logging/logging.dart';
 import 'package:open_weather_provider/exceptions/weather_exceptions.dart';
 import 'package:open_weather_provider/models/custom_error.dart';
 import 'package:open_weather_provider/models/direct_geocoding.dart';
+import 'package:open_weather_provider/models/weather.dart';
 import 'package:open_weather_provider/services/weather_api_services.dart';
-
-import '../models/weather.dart';
 
 class WeatherRepository {
   final WeatherApiServices weatherApiServices;
