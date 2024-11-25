@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:open_weather_provider/constants/constants.dart';
-import 'package:open_weather_provider/models/weather.dart';
 import 'package:open_weather_provider/pages/search_page.dart';
 import 'package:open_weather_provider/pages/settings_page.dart';
 import 'package:open_weather_provider/providers/temp_settings/temp_settings_provider.dart';
