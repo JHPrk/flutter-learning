@@ -1,20 +1,20 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:logging/logging.dart';
 
 part 'temp_settings_state.dart';
 
-class TempSettingsProvider with ChangeNotifier {
-  TempSettingsState _state = TempSettingsState.initial();
-  TempSettingsState get state => _state;
+class TempSettingsProvider extends StateNotifier<TempSettingsState> {
   static final Logger _log = Logger('TempSettingsProvider');
 
+  TempSettingsProvider() : super(TempSettingsState.initial());
+
   void toggleTempUnit() {
-    _state = _state.copyWith(
-        tempUnit: _state.tempUnit == TempUnit.celcius
+    state = state.copyWith(
+        tempUnit: state.tempUnit == TempUnit.celcius
             ? TempUnit.fahrenheit
             : TempUnit.celcius);
-    _log.info('temp unit: $_state');
-    notifyListeners();
+    _log.info('temp unit: $state');
   }
 }

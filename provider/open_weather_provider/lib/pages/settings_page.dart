@@ -22,8 +22,8 @@ class _SettingsPageState extends State<SettingsPage> {
           title: Text('Temperature Unit'),
           subtitle: Text('Celcius/Fahrenheit (Default: Celcius)'),
           trailing: Switch(
-            value: context.watch<TempSettingsProvider>().state.tempUnit ==
-                TempUnit.celcius,
+            value:
+                context.watch<TempSettingsState>().tempUnit == TempUnit.celcius,
             onChanged: (_) {
               context.read<TempSettingsProvider>().toggleTempUnit();
             },
