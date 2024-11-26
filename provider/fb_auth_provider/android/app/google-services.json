@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "895494186706",
+    "project_id": "myauthproviderproject",
+    "storage_bucket": "myauthproviderproject.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895494186706:android:e1e079988d30e9c3baaf0b",
+        "android_client_info": {
+          "package_name": "com.jhp.fbAuthProvider"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdr56IopgifEdiAKPaDi2OZpbymXQa7t4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
