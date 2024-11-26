@@ -30,3 +30,4 @@ development_kit/flutter-games-card/macos/Runner/GoogleService-Info.plist
 development_kit/flutter-games-card/ios/Runner/GoogleService-Info.plist
 provider/fb_auth_provider/macos/Runner/GoogleService-Info.plist
 provider/fb_auth_provider/ios/Runner/GoogleService-Info.plist
+provider/fb_auth_provider/firepit-log.txt
