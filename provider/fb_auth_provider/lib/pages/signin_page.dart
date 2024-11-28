@@ -148,7 +148,7 @@ class _SigninPageState extends State<SigninPage> {
                           decoration: TextDecoration.underline,
                         ),
                       ),
-                      child: const Text('Sign Up'),
+                      child: const Text('Not a member? Sign up!'),
                     )
                   ],
                 ),

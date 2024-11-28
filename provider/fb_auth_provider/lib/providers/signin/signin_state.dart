@@ -3,7 +3,12 @@ import 'package:equatable/equatable.dart';
 
 import 'package:fb_auth_provider/models/custom_error.dart';
 
-enum SigninStatus { initial, submitting, success, error }
+enum SigninStatus {
+  initial,
+  submitting,
+  success,
+  error,
+}
 
 class SigninState extends Equatable {
   final SigninStatus signinStatus;
