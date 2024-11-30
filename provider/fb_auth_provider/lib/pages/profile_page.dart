@@ -2,6 +2,7 @@ import 'package:fb_auth_provider/providers/profile/profile_provider.dart';
 import 'package:fb_auth_provider/providers/profile/profile_state.dart';
 import 'package:fb_auth_provider/utils/error_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
 
@@ -14,35 +15,37 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late final ProfileProvider profileProvider;
+  late final RemoveListener _removeListener;
   @override
   void initState() {
     super.initState();
     profileProvider = context.read<ProfileProvider>();
-    profileProvider.addListener(errorDialogListener);
+    _removeListener = profileProvider.addListener(errorDialogListener,
+        fireImmediately: false);
     _getProfile();
   }
 
   void _getProfile() {
     final String uid = context.read<fbAuth.User?>()!.uid;
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => context.read<ProfileProvider>().getProfile(uid: uid),
+      (_) => context.read<ProfileProvider>().getProfile(uid: 'uid'),
     );
   }
 
-  void errorDialogListener() {
-    if (profileProvider.state.profileStatus == ProfileStatus.error) {
-      errorDialog(context, profileProvider.state.error);
+  void errorDialogListener(ProfileState state) {
+    if (state.profileStatus == ProfileStatus.error) {
+      errorDialog(context, state.error);
     }
   }
 
   @override
   void dispose() {
-    profileProvider.removeListener(errorDialogListener);
+    _removeListener();
     super.dispose();
   }
 
   Widget _buildProfile() {
-    final profileState = context.watch<ProfileProvider>().state;
+    final profileState = context.watch<ProfileState>();
     if (profileState.profileStatus == ProfileStatus.initial) {
       return Container();
     } else if (profileState.profileStatus == ProfileStatus.loading) {
